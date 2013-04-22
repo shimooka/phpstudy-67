@@ -2,7 +2,7 @@
 	endmacro;
 
 MenuSub:
-	menu "convert local to instance variable", "extract method", "rename local variable";
+	menu "convert local to instance variable", "extract method", "rename local variable", "encapsulate field";
 	if (result == 0) {	// canceled
 		endmacro;
 	} else if (result == 1) {
@@ -29,6 +29,10 @@ MenuSub:
 		call InputSub "new variable name";
 		$new_name = $$return;
 		call ExecuteRefactoringSub "rename-local-variable", str(lineno), $variable, $new_name;
+	} else if (result == 4) {
+		call SelectSub "select field", 1;
+		$variable = gettext(seltopx, seltopy, selendx, selendy);
+		call ExecuteRefactoringSub "encapsulate-field", str(lineno), $variable;
 	}
 
 	return;
