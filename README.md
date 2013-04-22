@@ -11,16 +11,22 @@ phpstudy-67
 プレゼン資料
 -
 
-* 第67回PHP勉強会.pdf
+* phpstudy-67.pdf - 紹介編
+* phpstudy-67-2.pdf - 内部構造編
 
 デモで使ったファイル
 -
 
-* refactor.phar - PHP Refactoring Browser
+* refactor.phar - PHP Refactoring Browser (Encapsulate Field対応版)
 * php_refactor.mac - 秀丸マクロ
-* refactor.bat - 秀丸マクロカラ実行するバッチファイル。PHP Refactoring Browserを実行する
+* refactor.bat - 秀丸マクロから実行するバッチファイル。PHP Refactoring Browserを実行する
 * Calculator.php - サンプルコード(その1)
-* FooServiceTest.php - サンプルコード(その2)
+* FooServiceTest.php - サンプルコード(その2)。こっちはデモで使ってません
+
+その他
+-
+
+* [Windows版GNU patch]は別途ダウンロードしてPATHを通す必要があります。
 
 関連リンク
 -
@@ -36,3 +42,4 @@ phpstudy-67
   [PHP Refactoring Browser Alpha Release - Qafoo GmbH - passion for software quality]: http://qafoo.com/blog/041_refactoring_browser.html
   [QafooLabs/php-refactoring-browser · GitHub]: https://github.com/QafooLabs/php-refactoring-browser
   [秀まるおのホームページ(サイトー企画)－秀丸エディタ]: http://hide.maruo.co.jp/software/hidemaru.html
+  [Windows版GNU patch]: http://gnuwin32.sourceforge.net/packages/patch.htm
