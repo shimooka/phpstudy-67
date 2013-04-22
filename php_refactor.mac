@@ -1,0 +1,61 @@
+	call MenuSub;
+	endmacro;
+
+MenuSub:
+	menu "convert local to instance variable", "extract method", "rename local variable";
+	if (result == 0) {	// canceled
+		endmacro;
+	} else if (result == 1) {
+		call SelectSub "select variable", 1;
+		$variable = gettext(seltopx, seltopy, selendx, selendy);
+		call ExecuteRefactoringSub "convert-local-to-instance-variable", str(lineno), $variable;
+	} else if (result == 2) {
+		call SelectSub "select code", 0;
+		$code = gettext(seltopx, seltopy, selendx, selendy);
+		if (ascii(rightstr($code, 1)) == 10) {
+			$code = leftstr($code, strlen($code) - 1);
+		}
+		if (ascii(rightstr($code, 1)) == 13) {
+			$code = leftstr($code, strlen($code) - 1);
+		}
+message str(ascii(rightstr($code, 1)));
+		call InputSub "method_name";
+		$method_name = $$return;
+		#line_start = seltopy + 1;
+		#line_end = selendy;
+		call ExecuteRefactoringSub "extract-method", str(#line_start) + "-" + str(#line_end), $method_name;
+	} else if (result == 3) {
+		call SelectSub "select variable", 1;
+		$variable = gettext(seltopx, seltopy, selendx, selendy);
+		call InputSub "new variable name";
+		$new_name = $$return;
+		call ExecuteRefactoringSub "rename-local-variable", str(lineno), $variable, $new_name;
+	}
+
+	return;
+
+ExecuteRefactoringSub:
+	$command = "refactor.bat " + $$1 + " " + filename2 + " " + $$2 + " " + $$3 + " " + $$4;
+	run $command;
+	return;
+
+InputSub:
+	$value = input($$1);
+	if ($value == "") {
+		message "invalid " + $$1;
+		endmacro;
+	}
+	return $value;
+
+SelectSub:
+	inputpos $$1;
+	if (!selecting) {
+		endmacro;
+	}
+	if (##2) {
+		if (seltopy != selendy) {
+			message "invalid selecting";
+			endmacro;
+		}
+	}
+	return;
