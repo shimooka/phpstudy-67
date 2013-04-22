@@ -18,7 +18,6 @@ MenuSub:
 		if (ascii(rightstr($code, 1)) == 13) {
 			$code = leftstr($code, strlen($code) - 1);
 		}
-message str(ascii(rightstr($code, 1)));
 		call InputSub "method_name";
 		$method_name = $$return;
 		#line_start = seltopy + 1;
